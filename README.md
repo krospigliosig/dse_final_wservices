@@ -113,4 +113,4 @@ Los siguientes módulos están implementados como microservicios REST, documenta
 ---
 
 ### URL del repositorio
-.(https://github.com/krospigliosig/dse_final_wservices.git).
+https://github.com/krospigliosig/dse_final_wservices.git
