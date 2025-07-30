@@ -1,10 +1,11 @@
 from uuid import UUID
 from datetime import datetime
 from .resultado_examen import ResultadoExamen
+from typing import Optional
 
 class Examen:
     def __init__(self, id: UUID, postulante_id: UUID, fecha: datetime, estado: str = "CERRADO",
-                 resultado: ResultadoExamen | None = None):
+                 resultado: Optional[ResultadoExamen] = None):
         self.id = id
         self.postulante_id = postulante_id
         self.fecha = fecha

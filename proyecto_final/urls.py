@@ -22,7 +22,7 @@ from pago.controladores.pago_controller import PagoController
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/postulantes/', include('postulante.urls')),
-    path('api/pagos/', include('pago.urls')),
-    path('api/examenes/', include('examen.urls')),
+    path("api/postulantes/", include("postulante.urls", namespace="postulante")),
+    path('api/examenes/', include('examen.urls', namespace="examen")),
+    path('api/pagos/', include('pago.urls', namespace="pago")),
 ]

@@ -13,7 +13,7 @@ class ProgramarExamenServicio:
             raise ValueError("El postulante no tiene pago aprobado.")
         exam = Examen(
             id=uuid4(), postulante_id=postulante_id, fecha=fecha,
-            asistencia=False, respuestas={}, estado="PROGRAMADO"
+            estado="PROGRAMADO"
         )
         self.repo.guardar(exam)
         return exam
