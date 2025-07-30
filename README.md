@@ -23,6 +23,7 @@ El sistema ha sido diseñado aplicando los principios de **Domain-driven Design*
 - `Contratación`: registro, evaluación y contratación de profesores.
 
 Cada módulo representa un subdominio, con sus propias entidades, reglas de negocio y servicios REST. Se ha usado una estructura por capas (infraestructura, dominio y aplicación), facilitando la escalabilidad, mantenibilidad y pruebas.
+<img width="1251" height="1600" alt="image" src="https://github.com/user-attachments/assets/2e627aa5-15f2-43f3-a1ee-3f552d469a38" />
 
 ---
 
