@@ -4,7 +4,7 @@ from postulante.domain.postulante import Postulante
 
 class IPostulanteRepositorio(ABC):
     @abstractmethod
-    def guardar(self, postulante: Postulante) -> None:
+    def guardar(self, postulante: Postulante, archivo_documento: object) -> None:
         pass
 
     @abstractmethod

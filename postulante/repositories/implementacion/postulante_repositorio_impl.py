@@ -3,14 +3,14 @@ from postulante.domain.postulante import Postulante
 from postulante.infraestructura.models.postulante_model import PostulanteModel
 
 class PostulanteRepositorioImpl(IPostulanteRepositorio):
-    def guardar(self, postulante: Postulante) -> None:
+    def guardar(self, postulante: Postulante, archivo_documento: object) -> None:
         PostulanteModel.objects.create(
             id=postulante.id,
             nombres=postulante.nombres,
             apellidos=postulante.apellidos,
             dni=postulante.dni,
             email=postulante.email,
-            fecha_nacimiento=postulante.fecha_nacimiento,
+            archivo_documento=archivo_documento,
             estado=postulante.estado
         )
 
@@ -22,6 +22,6 @@ class PostulanteRepositorioImpl(IPostulanteRepositorio):
             apellidos=modelo.apellidos,
             dni=modelo.dni,
             email=modelo.email,
-            fecha_nacimiento=modelo.fecha_nacimiento,
+            archivo_documento=str(modelo.archivo_documento),  
             estado=modelo.estado
         )

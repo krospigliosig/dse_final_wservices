@@ -8,7 +8,7 @@ class PostulanteModel(models.Model):
     apellidos = models.CharField(max_length=100)
     dni = models.CharField(max_length=8, unique=True)
     email = models.EmailField(unique=True)
-    fecha_nacimiento = models.DateField()
+    archivo_documento = models.FileField(upload_to='documentos/')
     estado = models.CharField(max_length=50)
 
     def __str__(self):

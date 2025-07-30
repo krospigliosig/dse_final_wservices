@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'postulante',  
     'pago',
     'examen',
+    'django_celery_results',
 ]
 
 REST_FRAMEWORK = {
@@ -50,6 +51,13 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ]
 }
+
+CELERY_BROKER_URL = 'amqp://localhost'  
+CELERY_RESULT_BACKEND = 'django-db'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

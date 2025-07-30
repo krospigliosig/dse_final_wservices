@@ -6,15 +6,15 @@ class GestionarPostulanteServicio:
     def __init__(self):
         self.repositorio = PostulanteRepositorioImpl()
 
-    def crear_postulante(self, datos: dict):
+    def crear_postulante(self, datos: dict, archivo_documento):
         postulante = Postulante(
             id=uuid4(),
             nombres=datos["nombres"],
             apellidos=datos["apellidos"],
             dni=datos["dni"],
             email=datos["email"],
-            fecha_nacimiento=datos["fecha_nacimiento"],
+            archivo_documento=str(archivo_documento),  
             estado="PENDIENTE"
         )
-        self.repositorio.guardar(postulante)
+        self.repositorio.guardar(postulante, archivo_documento)
         return postulante
