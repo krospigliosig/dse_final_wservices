@@ -1,9 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.parsers import MultiPartParser, FormParser 
 from postulante.services.gestionar_postulante_servicio import GestionarPostulanteServicio
 
+
 class PostulanteController(APIView):
+    parser_classes = (MultiPartParser, FormParser)
     def post(self, request):
         servicio = GestionarPostulanteServicio()
         datos = {
