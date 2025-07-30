@@ -1,53 +1,25 @@
-from pago.repositories.interface.pago_repositorio import IPagoRepositorio
+from pago.repositories.interface.pago_repositorio import PagoRepositorio
 from pago.domain.pago import Pago
-from pago.domain.transaccion_bancaria import TransaccionBancaria
 from pago.infraestructura.models.pago_model import PagoModel
-from pago.infraestructura.models.transaccion_bancaria_model import TransaccionBancariaModel
-from postulante.infraestructura.models.postulante_model import PostulanteModel
-from uuid import UUID
 
-class PagoRepositorioImpl(IPagoRepositorio):
-    def guardar(self, pago: Pago) -> None:
-        transaccion_model = None
-        if pago.transaccion:
-            transaccion_model, _ = TransaccionBancariaModel.objects.get_or_create(
-                id_transaccion=pago.transaccion.id_transaccion,
-                defaults={
-                    "fecha": pago.transaccion.fecha,
-                    "banco": pago.transaccion.banco,
-                    "monto": pago.transaccion.monto
-                }
-            )
+class PagoRepositorioImpl(PagoRepositorio):
 
-        PagoModel.objects.update_or_create(
-            id=pago.id,
-            defaults={
-                "postulante": PostulanteModel.objects.get(id=pago.postulante_id),
-                "monto": pago.monto,
-                "moneda": pago.moneda,
-                "estado": pago.estado,
-                "motivo_rechazo": pago.motivo_rechazo,
-                "transaccion": transaccion_model
-            }
+    def guardar_pago(self, pago: Pago):
+        PagoModel.objects.create(
+            dni=pago.dni,
+            monto=pago.monto,
+            servicio=pago.servicio,
+            estado_transaccion=pago.estado_transaccion
         )
 
-    def obtener_por_id(self, id: UUID) -> Pago:
-        modelo = PagoModel.objects.get(id=id)
-        transaccion = None
-        if modelo.transaccion:
-            transaccion = TransaccionBancaria(
-                id_transaccion=modelo.transaccion.id_transaccion,
-                fecha=modelo.transaccion.fecha,
-                banco=modelo.transaccion.banco,
-                monto=modelo.transaccion.monto
+    def obtener_pagos_por_dni(self, dni: str) -> list[Pago]:
+        pagos_model = PagoModel.objects.filter(dni=dni)
+        return [
+            Pago(
+                dni=p.dni,
+                monto=p.monto,
+                servicio=p.servicio,
+                estado_transaccion=p.estado_transaccion
             )
-        return Pago(
-            id=modelo.id,
-            postulante_id=modelo.postulante.id,
-            monto=modelo.monto,
-            moneda=modelo.moneda,
-            fecha_creacion=modelo.fecha_creacion,
-            estado=modelo.estado,
-            motivo_rechazo=modelo.motivo_rechazo,
-            transaccion=transaccion
-        )
+            for p in pagos_model
+        ]

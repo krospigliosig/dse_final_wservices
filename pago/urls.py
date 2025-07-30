@@ -1,7 +1,6 @@
-# pago/urls.py
 from django.urls import path
-from pago.controladores.pago_controller import PagoController
+from pago.controladores.pago_controller import RegistrarPagoAPI
 
 urlpatterns = [
-    path('', PagoController.as_view(), name='crear_pago'),
+    path('', RegistrarPagoAPI.as_view(), name='registrar_pago'),
 ]
